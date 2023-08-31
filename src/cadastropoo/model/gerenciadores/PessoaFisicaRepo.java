@@ -12,8 +12,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +29,9 @@ public class PessoaFisicaRepo {
     //Método inserir que tem como parâmetro tipo = PessoaFisica (classe)
     public void inserir(PessoaFisica pessoaFisica) {
         pessoasFisicas.add(pessoaFisica);
+
+        System.out.println("\n ==== Dados Adicionadas =======");
+        pessoaFisica.exibir();
     }
 
     //Método alterar que tem como parâmetro tipo = PessoaFisica (classe)
@@ -38,7 +39,9 @@ public class PessoaFisicaRepo {
         for (int i = 0; i < pessoasFisicas.size(); i++) {
             if (pessoasFisicas.get(i).getId() == pessoaFisica.getId()) {
                 pessoasFisicas.set(i, pessoaFisica);
-                break;
+                System.out.println("\n ==== Dados Alterados =======");
+                pessoasFisicas.get(i).exibir();
+                //break;
             }
         }
     }
@@ -47,8 +50,12 @@ public class PessoaFisicaRepo {
     public void excluir(int id) {
         for (int i = 0; i < pessoasFisicas.size(); i++) {
             if (pessoasFisicas.get(i).getId() == id) {
+                System.out.println("\n Estamos removendo ==> "+ pessoasFisicas.get(i).getNome());                
                 pessoasFisicas.remove(i);
-                break;
+                //break;
+            } else {
+                System.out.println("\n Id inexistente! ");
+                //break;
             }
         }
     }
@@ -58,6 +65,9 @@ public class PessoaFisicaRepo {
         for (PessoaFisica pessoaFisica : pessoasFisicas) {
             if (pessoaFisica.getId() == id) {
                 return pessoaFisica;
+            } else {
+                //System.out.println("ID inexistente!");
+                return null;
             }
         }
         return null;
@@ -67,47 +77,44 @@ public class PessoaFisicaRepo {
         return pessoasFisicas;
     }
 
-    /*
-    public void persistir(String nomeArquivo) {
-        try (BufferedWriter escrever = new BufferedWriter(new FileWriter(nomeArquivo))) {
-            for (PessoaFisica pessoa : pessoasFisicas) {
-                escrever.write(pessoa.toString());
-                escrever.newLine();                
-            }
-            System.out.println("Dados de Pessoas Fisicas Armazenados.");
-        } catch (IOException e) {
-            System.out.println("Erro ao gravar os dados!" + e.getMessage());
-        }*/
     
-    
-    public void persistir(String nomeArquivo) {
-        // Create a file input stream
+    public void persistir(String nomeArquivo) throws IOException {
+        // Create a file input stream       
         File arquivoPF = new File(nomeArquivo);
-        try {
-            
-            ObjectOutputStream objOutput = new ObjectOutputStream(new FileOutputStream(arquivoPF));
+        FileOutputStream fos = new FileOutputStream(arquivoPF);
+        
+        try (ObjectOutputStream objOutput = new ObjectOutputStream(fos)){
+                       
             objOutput.writeObject(pessoasFisicas);
             objOutput.close();           
             
+            System.out.println("Dados de Pessoa Física amazendados com sucesso!\n");
             
         } catch (IOException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
         }    
 
     }
     
-        // desserialização: recuperando os objetos gravados no arquivo binário "nomeArquivo"
     
-    public ArrayList<Object> recuperar(String nomeArquivo) {
-        
-        ArrayList<Object> lista = new ArrayList();
+    // desserialização: recuperando os objetos gravados no arquivo binário "nomeArquivo"
+    public ArrayList<PessoaFisica> recuperar(String nomeArquivo) throws IOException, FileNotFoundException {
+
+        //ArrayList<Object> lista = new ArrayList();
+        ArrayList<PessoaFisica> listaRecuperada = new ArrayList();
+        File arq = new File(nomeArquivo);
+        FileInputStream fis = new FileInputStream(arq);
         try {
-            File arq = new File(nomeArquivo);
             if (arq.exists()) {
-                ObjectInputStream objInput = new ObjectInputStream(new FileInputStream(arq));
-                lista = (ArrayList) objInput.readObject();
-                objInput.close();
+                try (ObjectInputStream objInput = new ObjectInputStream(fis)) {
+                    listaRecuperada = (ArrayList<PessoaFisica>) objInput.readObject();
+
+                    System.out.println("Dados de Pessoa Física recuperados com sucesso!");
+                    for (PessoaFisica pessoa : listaRecuperada) {
+                        pessoasFisicas.add(pessoa);
+                        pessoa.exibir();
+                    }
+                }
             }
         } catch (IOException erro1) {
             System.out.printf("Erro: %s", erro1.getMessage());
@@ -115,11 +122,7 @@ public class PessoaFisicaRepo {
             System.out.printf("Erro: %s", erro2.getMessage());
         }
 
-        return (lista);
+        return listaRecuperada;
     }
-    
-    
-    
-    
 
 }

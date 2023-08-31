@@ -8,7 +8,10 @@ import java.io.Serializable;
  */
 public class PessoaJuridica extends Pessoa implements Serializable {
 
-    protected String cnpj;
+    private String cnpj;
+    
+    public PessoaJuridica() {
+    }
 
     public PessoaJuridica(int id, String nome, String cnpj) {
         super(id, nome);
@@ -29,7 +32,7 @@ public class PessoaJuridica extends Pessoa implements Serializable {
         System.out.println("Nome da Empresa: " + nome);
         System.out.println("Código ID:       " + id);
         System.out.println("CNPJ:            " + cnpj);
-        System.out.println("===================================");
+        System.out.println("===================================\n");
     }
 
 }

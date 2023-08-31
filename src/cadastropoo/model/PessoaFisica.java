@@ -36,23 +36,23 @@ public class PessoaFisica extends Pessoa implements Serializable {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-    /*
+    
     @Override
     public void exibir() {
-        super.exibir();
+        //super.exibir();        
         System.out.println("Nome:      "+nome);
         System.out.println("Código ID: "+id);
         System.out.println("CPF:       "+cpf);
         System.out.println("Idade:     "+idade);
-        System.out.println("==================================="); 
+        System.out.println("===================================\n"); 
         
         
-    }*/
-    
+    }
+    /*
     @Override
     public String toString() {
-        return new StringBuffer("\nCódigo ID : ").append(this.id)
-                .append(" - Nome : ").append(this.nome).append("\nCPF: ").append(this.cpf).append("\nIdade: ").append(this.idade).append("\n=======================").toString();
-    }
+        return new StringBuffer("\nCódigo ID : ")
+                .append(this.id).append(" - Nome : ").append(this.nome).append("\nCPF: ").append(this.cpf).append("\nIdade: ").append(this.idade).append("\n=======================").toString();
+    }*/
     
 }
