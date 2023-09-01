@@ -1,20 +1,17 @@
 package cadastropoo.model.gerenciadores;
 
 import cadastropoo.model.PessoaFisica;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
 
-/**
- *
+/** *
  * @author HervalDantas
  */
 public class PessoaFisicaRepo {
@@ -52,10 +49,10 @@ public class PessoaFisicaRepo {
             if (pessoasFisicas.get(i).getId() == id) {
                 System.out.println("\n Estamos removendo ==> "+ pessoasFisicas.get(i).getNome());                
                 pessoasFisicas.remove(i);
-                //break;
+                break;
             } else {
                 System.out.println("\n Id inexistente! ");
-                //break;
+                break;
             }
         }
     }
@@ -76,7 +73,6 @@ public class PessoaFisicaRepo {
     public ArrayList<PessoaFisica> obterTodos() {
         return pessoasFisicas;
     }
-
     
     public void persistir(String nomeArquivo) throws IOException {
         // Create a file input stream       
@@ -92,10 +88,8 @@ public class PessoaFisicaRepo {
             
         } catch (IOException e) {
             System.out.println("An error occurred.");
-        }    
-
-    }
-    
+        }
+    }    
     
     // desserialização: recuperando os objetos gravados no arquivo binário "nomeArquivo"
     public ArrayList<PessoaFisica> recuperar(String nomeArquivo) throws IOException, FileNotFoundException {
@@ -121,8 +115,6 @@ public class PessoaFisicaRepo {
         } catch (ClassNotFoundException erro2) {
             System.out.printf("Erro: %s", erro2.getMessage());
         }
-
         return listaRecuperada;
     }
-
 }

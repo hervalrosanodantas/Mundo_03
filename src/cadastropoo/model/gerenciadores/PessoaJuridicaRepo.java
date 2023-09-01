@@ -11,8 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-/**
- *
+/** *
  * @author HervalDantas
  */
 public class PessoaJuridicaRepo {
@@ -49,10 +48,10 @@ public class PessoaJuridicaRepo {
             if (pessoasJuridicas.get(i).getId() == id) {
                 System.out.println("\n Estamos removendo ==> "+ pessoasJuridicas.get(i).getNome()); 
                 pessoasJuridicas.remove(i);
-                //break;
+                break;
             }else {
                 System.out.println("\n Id inexistente! ");
-                //break;
+                break;
             }
         }
     }
@@ -88,9 +87,7 @@ public class PessoaJuridicaRepo {
             
         } catch (IOException e) {
             System.out.println("Algo deu errado.");
-        }    
-
-
+        }
     }
 
     public ArrayList<PessoaJuridica> recuperar(String nomeArquivo) throws IOException, FileNotFoundException {
@@ -116,7 +113,6 @@ public class PessoaJuridicaRepo {
         } catch (ClassNotFoundException erro2) {
             System.out.printf("Erro: %s", erro2.getMessage());
         }
-
         return listaRecuperada;
     }
 }

@@ -2,12 +2,10 @@ package cadastropoo.model;
 
 import java.io.Serializable;
 
-/**
- *
+/** *
  * @author HervalDantas
  */
 public class PessoaJuridica extends Pessoa implements Serializable {
-
     private String cnpj;
     
     public PessoaJuridica() {
@@ -34,5 +32,4 @@ public class PessoaJuridica extends Pessoa implements Serializable {
         System.out.println("CNPJ:            " + cnpj);
         System.out.println("===================================\n");
     }
-
 }

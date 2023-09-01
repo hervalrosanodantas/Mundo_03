@@ -1,13 +1,10 @@
 package cadastropoo.model;
 
 import java.io.Serializable;
-
-/**
- *
+/** *
  * @author HervalDantas
  */
-public class PessoaFisica extends Pessoa implements Serializable {
-    
+public class PessoaFisica extends Pessoa implements Serializable {    
     private String cpf;
     private int idade;    
     
@@ -17,8 +14,7 @@ public class PessoaFisica extends Pessoa implements Serializable {
     public PessoaFisica(int id, String nome, String cpf, int idade) {
         super(id, nome);
         this.cpf = cpf;
-        this.idade = idade;
-        
+        this.idade = idade;        
     }
 
     public String getCpf() {
@@ -44,15 +40,7 @@ public class PessoaFisica extends Pessoa implements Serializable {
         System.out.println("Código ID: "+id);
         System.out.println("CPF:       "+cpf);
         System.out.println("Idade:     "+idade);
-        System.out.println("===================================\n"); 
+        System.out.println("===================================\n");       
         
-        
-    }
-    /*
-    @Override
-    public String toString() {
-        return new StringBuffer("\nCódigo ID : ")
-                .append(this.id).append(" - Nome : ").append(this.nome).append("\nCPF: ").append(this.cpf).append("\nIdade: ").append(this.idade).append("\n=======================").toString();
-    }*/
-    
+    }    
 }
